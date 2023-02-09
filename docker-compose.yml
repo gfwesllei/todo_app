@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  app-todo1:
+    build: . 
+    container_name: todo_app1
+    environment: 
+      SERVER_PORT: "8081"
+      JAVA_TOOL_OPTIONS: "-Xms1G -Xmx2G"
+    ports: 
+      - "8081:8081"
+    depends_on:
+      - app-todo2
+
+  app-todo2:
+    build: . 
+    container_name: todo_app2
+    environment: 
+      SERVER_PORT: "8082"
+    ports: 
+      - "8082:8082"
+
+  haproxy:
+    build: haproxy
+    container_name: haproxy
+    ports:
+      - "80:80"
+      - "83:83"
+    depends_on:
+      - app-todo1
+
+  

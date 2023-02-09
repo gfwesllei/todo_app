@@ -1,0 +1,7 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  port: 9000
+  security:
+    enabled: false
